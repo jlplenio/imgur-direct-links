@@ -1,0 +1,25 @@
+body, html {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.content {
+    margin: 0 auto;
+    width: 400px;
+    text-align: center;
+}
+
+textarea {
+    resize: none;
+    text-align: left;
+    height: auto;
+    width: 30em;
+}
+
+.form {
+    margin-top: 20px;
+}
+
+#content {
+    width: 70%;
+}
