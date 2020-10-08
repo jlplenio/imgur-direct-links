@@ -22,7 +22,7 @@ class Grabber:
 
 
 def verify_link(url):
-    re_url_pattern = "^https://imgur.com/(a|gallery)/[a-zA-Z0-9]{7}$"
+    re_url_pattern = "^https://imgur.com/(a|gallery)/[a-zA-Z0-9]{5,7}$"
     import re
     if re.match(re_url_pattern, url):
         return True
