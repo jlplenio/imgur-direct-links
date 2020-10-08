@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>imgur direct link grabber v0.1</title>
+<title>imgur direct link grabber</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">imgur direct link grabber v0.1</h1>
-    <h4 style="text-align: center">Insert imgur gallery url below</h4>
+    <h1>imgur direct link grabber</h1>
+    <h3>Insert imgur url below</h3>
 
     <form action="/" method="POST">
         <div><input type="text" name="imgur_url_field" id="content" value="{{imgur_url}}"></div>
@@ -19,6 +19,8 @@
     </textarea>
 
 
+    <a href="https://github.com/jlplenio/imgur-direct-links"><img src="/static/img/GitHub-Mark-32px.png"></a>
+    <div>v0.2</div>
 
 </div>
 {% endblock %}

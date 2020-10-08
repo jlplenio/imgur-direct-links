@@ -14,6 +14,8 @@ textarea {
     text-align: left;
     height: auto;
     width: 30em;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .form {
