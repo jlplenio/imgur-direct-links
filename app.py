@@ -1,17 +1,12 @@
-import sys
-from multiprocessing import Value
-
 from flask import Flask, render_template, request
-
-from util import build_post_response
-
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 from dao import Dao
+from util import build_post_response
 
-# volatile visit counter
-counter = Value('i', 0)
+app = Flask(__name__)
+version = "v0.3"
 
 # rate limiting
 limiter = Limiter(
@@ -26,15 +21,19 @@ dao = Dao()
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    with counter.get_lock():
-        counter.value += 1
-        print("Visit", counter.value)
-        sys.stdout.flush()
+    render_parameters = {}
 
     if request.method == 'POST':
-        return build_post_response(request)
-    else:
-        return render_template('index.html')
+        print(request.form['list_textarea'])
+
+        render_parameters = build_post_response(request)
+        if 'link_list' in render_parameters:
+            dao.inc_counter("actions")
+
+    return render_template('index.html',
+                           actions=dao.get_counter("actions")[0][0],
+                           version=version,
+                           **render_parameters)
 
 
 if __name__ == '__main__':

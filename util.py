@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from flask import render_template
 
 
 class Grabber:
@@ -22,8 +21,8 @@ class Grabber:
 
 
 def verify_link(url):
-    re_url_pattern = "^https://imgur.com/(a|gallery)/[a-zA-Z0-9]{5,7}$"
     import re
+    re_url_pattern = "^https://imgur.com/(a|gallery)/[a-zA-Z0-9]{5,7}$"
     if re.match(re_url_pattern, url):
         return True
     return False
@@ -35,14 +34,11 @@ def build_post_response(request):
     imgur_url = request.form['imgur_url_field']
 
     if not verify_link(imgur_url):
-        return render_template('index.html', message="no valid imgur url found")
+        return {'message': "no valid imgur url found"}
 
     try:
         link_list = Grabber.get_direct_links(imgur_url)
         link_list = [link + "\n" for link in link_list]
     except Exception as e:
         message = "an unexpected error occurred " + str(e)
-    return render_template('index.html',
-                           link_list=link_list,
-                           message=message,
-                           imgur_url=imgur_url)
+    return {'link_list': link_list, 'message': message, 'imgur_url': imgur_url}
