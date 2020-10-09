@@ -24,7 +24,6 @@ def index():
     render_parameters = {}
 
     if request.method == 'POST':
-        print(request.form['list_textarea'])
 
         render_parameters = build_post_response(request)
         if 'link_list' in render_parameters:
