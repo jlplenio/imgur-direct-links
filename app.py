@@ -8,7 +8,7 @@ from util import build_post_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
-app = Flask(__name__)
+from dao import Dao
 
 # volatile visit counter
 counter = Value('i', 0)
@@ -19,6 +19,9 @@ limiter = Limiter(
     key_func=get_remote_address,
     default_limits=["10 per minute"],
     )
+
+# data access object
+dao = Dao()
 
 
 @app.route('/', methods=['POST', 'GET'])
