@@ -10,6 +10,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 limits==1.5.1
 MarkupSafe==1.1.1
+psycopg2==2.8.6
 requests==2.24.0
 six==1.15.0
 soupsieve==2.0.1

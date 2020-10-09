@@ -7,7 +7,7 @@
 {% block body %}
 <div class="content">
     <h1>imgur direct link grabber</h1>
-    <h3>Insert imgur url below</h3>
+    <h3>insert imgur url below</h3>
 
     <form action="/" method="POST">
         <div><input type="text" name="imgur_url_field" id="content" value="{{imgur_url}}"></div>
@@ -15,12 +15,13 @@
     </form>
 
 
-    <textarea id="story" name="story" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}
+    <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}
     </textarea>
 
 
     <a href="https://github.com/jlplenio/imgur-direct-links"><img src="/static/img/GitHub-Mark-32px.png"></a>
-    <div>v0.2</div>
+    <div>{{version}}</div>
+    <div>(actions:{{actions}})</div>
 
 </div>
 {% endblock %}
