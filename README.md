@@ -1,9 +1,10 @@
-# Get direct links from imgur.com url
+# Get direct links from imgur.com gallery / album
 
-Grabs direct links from imgur, hosted on heroku:  
+Grabs direct links from an imgur gallery / album url, hosted on heroku.  
+The Heroku webapp may be sleeping, please wait a few seconds:  
 https://imgur-direct-links.herokuapp.com/
-
-The Heroku webapp may be sleeping, please wait a few seconds.
+  
+Adding IMG-tags and shuffling links is possible.
 
 ## Development 
 ### Utilizing
