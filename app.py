@@ -28,8 +28,8 @@ def index():
     if request.method == 'POST':
         if 'button_get_links' in request.form:
             render_parameters = get_links(request)
-            # if 'link_list' in render_parameters:
-            #     dao.inc_counter("actions")
+            if 'link_list' in render_parameters:
+                dao.inc_counter("actions")
         elif 'button_extra' in request.form.keys():
             render_parameters = handle_extras(request)
 
