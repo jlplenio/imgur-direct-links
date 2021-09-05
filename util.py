@@ -17,7 +17,7 @@ class Grabber:
         response = session.post(url, headers=cls.header)  # Todo, check page status
 
         soup = BeautifulSoup(response.text, "html.parser")
-        found_images = soup.findAll("div", itemtype="http://schema.org/ImageObject")
+        found_images = soup.findAll("div", itemtype="https://schema.org/ImageObject")
         images_codes = [found_image.get("id") for found_image in found_images]
         direct_links = [cls.img_url_template.format(code) for code in images_codes]
         return direct_links
@@ -31,19 +31,20 @@ def verify_link(url):
 
 
 def get_links(request):
-    link_list = ""
-    message = ""
     imgur_url = request.form['imgur_url_field']
-
+    message_error = "an unexpected error occurred"
+    message_wrong_url = "no valid imgur url found"
+    message_no_images = "unable to find images :/"
     if not verify_link(imgur_url):
-        return {'message': "no valid imgur url found"}
+        return {'message': message_wrong_url}
+
     try:
         link_list = Grabber.get_direct_links(imgur_url)
         link_list = [link + "\n" for link in link_list]
     except Exception as e:
-        message = "an unexpected error occurred " + str(e)
+        return {'message': message_error}
 
-    return {'link_list': link_list, 'message': message, 'imgur_url': imgur_url}
+    return {'link_list': link_list, 'message': message_no_images, 'imgur_url': imgur_url}
 
 
 def handle_extras(request):
