@@ -17,7 +17,7 @@ class Grabber:
         response = session.post(url, headers=cls.header)  # Todo, check page status
 
         soup = BeautifulSoup(response.text, "html.parser")
-        found_images = soup.findAll("div", itemtype="http://schema.org/ImageObject")
+        found_images = soup.findAll("div", itemtype="https://schema.org/ImageObject")
         images_codes = [found_image.get("id") for found_image in found_images]
         direct_links = [cls.img_url_template.format(code) for code in images_codes]
         return direct_links
