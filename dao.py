@@ -9,12 +9,22 @@ class Database:
 
     def __init__(self):
         self.database_url = os.environ['DATABASE_URL']
+        self.connection = None
+        self.cursor = None
+        self.establish_connection()
+
+    def establish_connection(self):
         self.connection = psycopg2.connect(self.database_url, sslmode='require')
         self.connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
         self.cursor = self.connection.cursor()
 
     def query(self, query):
-        self.cursor.execute(query)
+        try:
+            self.cursor.execute(query)
+        except psycopg2.InterfaceError as e:
+            print(e)
+            self.establish_connection()
+
         try:
             return self.cursor.fetchall()
         except:

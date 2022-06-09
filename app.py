@@ -8,7 +8,7 @@ from dao import Dao
 from util import get_links, handle_extras
 
 app = Flask(__name__)
-version = "v0.4"
+version = "v0.4.1"
 
 # rate limiting
 limiter = Limiter(
