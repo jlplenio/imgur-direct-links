@@ -11,7 +11,7 @@
 
     <form action="/" method="POST">
         <div><input  type="text" name="imgur_url_field" id="content" value="{{imgur_url}}"></div>
-        <button name="button_get_links" type="submit" value="get_links">get links</button>
+        <button name="button_get_links" type="submit" value="get_links">Get Links</button>
         <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}</textarea>
         <button name="button_extra" type="submit" value="img_tag">Add IMG-tags</button>
         <button name="button_extra" type="submit" value="shuffle">Shuffle</button>
@@ -21,6 +21,7 @@
     <div class="logo"><a href="https://github.com/jlplenio/imgur-direct-links"><img src="/static/img/GitHub-Mark-32px.png"></a></div>
     <div>{{version}}</div>
     <div>(actions:{{actions}})</div>
+    <div id="kofi"><a href='https://ko-fi.com/R6R6GVS9E' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></div>
 
 </div>
 {% endblock %}
