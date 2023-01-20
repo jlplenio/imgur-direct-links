@@ -5,10 +5,10 @@ from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 from dao import Dao
-from util import get_links, handle_extras
+from util import get_links
 
 app = Flask(__name__)
-version = "v0.4.2"
+version = "v0.5.0"
 
 # rate limiting
 limiter = Limiter(
@@ -28,10 +28,6 @@ def index():
     if request.method == 'POST':
         if 'button_get_links' in request.form:
             render_parameters = get_links(request)
-            if 'link_list' in render_parameters:
-                dao.inc_counter("actions")
-        elif 'button_extra' in request.form.keys():
-            render_parameters = handle_extras(request)
 
     return render_template('index.html',
                            actions=dao.get_counter("actions")[0][0],
