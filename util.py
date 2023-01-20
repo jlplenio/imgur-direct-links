@@ -45,38 +45,3 @@ def get_links(request):
         return {'message': message_error}
 
     return {'link_list': link_list, 'message': message_no_images, 'imgur_url': imgur_url}
-
-
-def handle_extras(request):
-    link_list_str = request.form['list_textarea']
-    link_list = {}
-
-    if "https://i.imgur.com" in link_list_str:
-
-        if request.form['button_extra'] == 'shuffle':
-            link_list = shuffle_links(link_list_str)
-
-        if request.form['button_extra'] == 'img_tag':
-            link_list = tag_links(link_list_str)
-
-    return {'link_list': link_list, 'imgur_url': request.form['imgur_url_field']}
-
-
-def shuffle_links(link_list_str):
-    link_list = link_list_str.split("\r\n")[:-1]
-    random.shuffle(link_list)
-    link_list = [link + "\n" for link in link_list]
-    return link_list
-
-
-def tag_links(link_list_str):
-    if "[IMG]" in link_list_str:
-        # delete tags
-        link_list = re.sub('\[/?IMG\]', '', link_list_str)
-
-    else:
-        # add tags
-        link_list = link_list_str.split("\r\n")[:-1]
-        link_list = [f"[IMG]{link}[/IMG]\n" for link in link_list]
-
-    return link_list

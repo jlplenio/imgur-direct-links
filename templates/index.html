@@ -1,27 +1,94 @@
 {% extends 'base.html' %}
-
 {% block head %}
-<title>imgur direct link grabber</title>
+    <title>Imgur Direct Link Grabber</title>
+    <meta name="description" content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
+    <meta property="og:title" content="Imgur Direct Link Grabber">
+    <meta property="og:description" content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
+    <meta property="og:url" content="https://imgur-direct-links.herokuapp.com/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    {#    <meta property="og:image" content="http://example.com/image.jpg">#}
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1>imgur direct link grabber</h1>
-    <h3>insert imgur url below</h3>
+    <div class="content">
+        <h1>imgur direct link grabber</h1>
+        <form action="/" method="POST">
+            <div><input type="text" name="imgur_url_field" id="content" value="{{ imgur_url }}"
+                        placeholder="insert imgur url here"></div>
+            <div>
+                <button name="button_get_links" type="submit" value="get_links">Get Links</button>
+            </div>
+            <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}</textarea>
+        </form>
+        <button id="button_img_tag" value="img_tag">Add IMG-tags</button>
+        <button id="button_shuffle" value="shuffle">Shuffle</button>
+        <div id="kofi"><a href='https://ko-fi.com/R6R6GVS9E' target='_blank'><img height='36'
+                                                                                  style='border:0px;height:36px;'
+                                                                                  src='https://storage.ko-fi.com/cdn/kofi2.png?v=3'
+                                                                                  border='0'
+                                                                                  alt='Buy Me a Coffee at ko-fi.com'/></a>
+        </div>
+        <div>{{ version }}</div>
+        <div>(actions:{{ actions }})</div>
+        <div class="logo"><a href="https://github.com/jlplenio/imgur-direct-links"><img
+                src="/static/img/GitHub-Mark-32px.png"></a></div>
 
-    <form action="/" method="POST">
-        <div><input  type="text" name="imgur_url_field" id="content" value="{{imgur_url}}"></div>
-        <button name="button_get_links" type="submit" value="get_links">Get Links</button>
-        <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}</textarea>
-        <button name="button_extra" type="submit" value="img_tag">Add IMG-tags</button>
-        <button name="button_extra" type="submit" value="shuffle">Shuffle</button>
-    </form>
+
+    </div>
+{% endblock %}
 
 
-    <div class="logo"><a href="https://github.com/jlplenio/imgur-direct-links"><img src="/static/img/GitHub-Mark-32px.png"></a></div>
-    <div>{{version}}</div>
-    <div>(actions:{{actions}})</div>
-    <div id="kofi"><a href='https://ko-fi.com/R6R6GVS9E' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi2.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></div>
+{% block scripts %}
+    <script>
 
-</div>
+        function addTags() {
+            let list_textarea = document.querySelector('#list_textarea');
+            let urls_split = list_textarea.value.split("\n")
+            urls_split = urls_split.filter(item => item.length > 0);
+            let urls_tagged = urls_split.map(function (url) {
+                return "[IMG]" + url + "[/IMG]"
+            })
+            list_textarea.value = urls_tagged.join("\n")
+            return null
+        }
+
+        function removeTags() {
+            let list_textarea = document.querySelector('#list_textarea');
+            let urls_tagged = list_textarea.value.split("\n");
+            let urls_without_tags = urls_tagged.map(url => url.slice(5, -6))
+            list_textarea.value = urls_without_tags.join("\n")
+            return null
+        }
+
+        function hasTag() {
+            let list_textarea = document.querySelector('#list_textarea');
+            let urls_tagged = list_textarea.value.split("\n");
+            let has_tags = urls_tagged.some(url => url.startsWith("[IMG]") && url.endsWith("[/IMG]"))
+            if (has_tags) {
+                removeTags();
+                return null;
+            }
+            addTags();
+            return null;
+        }
+
+        function shuffleTextArea() {
+            let list_textarea = document.querySelector('#list_textarea');
+            let urls_split = list_textarea.value.split("\n")
+            urls_split = urls_split.filter(item => item.length > 0);
+            let shuffled_array = urls_split.sort(() => Math.random() - 0.5);
+            list_textarea.value = shuffled_array.join("\n")
+            return null
+        }
+
+        let button_img_tag = document.getElementById("button_img_tag");
+        button_img_tag.addEventListener("click", hasTag);
+
+        let button_shuffle = document.getElementById("button_shuffle");
+        button_shuffle.addEventListener("click", shuffleTextArea);
+
+    </script>
+
+
 {% endblock %}
