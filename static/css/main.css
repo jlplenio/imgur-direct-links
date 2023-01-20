@@ -1,39 +1,54 @@
-body, html {
-    margin: 0;
-    font-family: sans-serif;
-}
-
 .content {
     margin: 0 auto;
-    width: 400px;
+    width: 500px;
     text-align: center;
 }
 
 .logo {
-    margin-top: 40px;
+    margin-top: 10px;
     margin-bottom: 10px;
 }
 
 #kofi {
     margin-top: 20px;
+    margin-bottom: 10px;
 }
 
-div {
-    margin-bottom: 4px;
+
+body {
+    font-family: sans-serif;
+    background-color: #f2f2f2;
+    color: #333333;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.0rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+input, textarea {
+    font-size: 0.8rem;
+    padding: 0.2rem;
+    width: 250px;
+    border: 1px solid #ccc;
+}
+
+button {
+    margin-top: 5px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 textarea {
+    width: 330px;
+    height: 200px;
+    margin-bottom: 0;
     resize: none;
-    text-align: left;
-    height: auto;
-    width: 30em;
-    margin-top: 20px;
 }
 
-.form {
-    margin-top: 20px;
-}
-
-#content {
-    width: 70%;
+::placeholder {
+    text-align: center;
 }
