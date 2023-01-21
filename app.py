@@ -28,6 +28,8 @@ def index():
     if request.method == 'POST':
         if 'button_get_links' in request.form:
             render_parameters = get_links(request)
+            if 'link_list' in render_parameters:
+                dao.inc_counter("actions")
 
     return render_template('index.html',
                            actions=dao.get_counter("actions")[0][0],
