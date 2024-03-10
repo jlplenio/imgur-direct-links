@@ -1,7 +1,10 @@
 # Get direct links from imgur.com gallery / album
 
-Grabs direct links from an imgur gallery / album url, hosted on heroku:
-https://imgur-direct-links.herokuapp.com/
+## This repo is archived. Please use https://github.com/jlplenio/imgur-direct-links-grabber
+
+
+
+Grabs direct links from an imgur gallery / album url, hosted on heroku.
   
 Adding IMG-tags and shuffling links is possible.
 
