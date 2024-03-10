@@ -1,11 +1,9 @@
 {% extends 'base.html' %}
 {% block head %}
     <title>Imgur Direct Link Grabber</title>
-    <meta name="description" content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
     <meta name="description"
           content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
     <meta property="og:title" content="Imgur Direct Link Grabber">
-    <meta property="og:description" content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
     <meta property="og:description"
           content="Get all direct links for images in an imgur album or from an imgur.com URL. Copy all direct links as plain text - ready to use. Add [IMG] tags and shuffle the URLs.">
     <meta property="og:url" content="https://imgur-direct-links.herokuapp.com/">
@@ -22,19 +20,14 @@
             <h3>This site is deprecated, please use <br> imgur-direct-links.vercel.app</h3>
         </a>
         <form action="/" method="POST">
-            <div><input type="text" name="imgur_url_field" id="content" value="{{ imgur_url }}"
             <div><input disabled type="text" name="imgur_url_field" id="content" value="{{ imgur_url }}"
                         placeholder="insert imgur url here"></div>
             <div>
-                <button name="button_get_links" type="submit" value="get_links">Get Links</button>
                 <button disabled name="button_get_links" type="submit" value="get_links">Get Links</button>
             </div>
-            <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}{% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}</textarea>
             <textarea id="list_textarea" name="list_textarea" readonly rows="10">{% if link_list|length > 0 %}
                 {% for link in link_list %}{{ link }}{% endfor %}{% else %}{{ message }}{% endif %}</textarea>
         </form>
-        <button id="button_img_tag" value="img_tag">Add IMG-tags</button>
-        <button id="button_shuffle" value="shuffle">Shuffle</button>
         <button disabled id="button_img_tag" value="img_tag">Add IMG-tags</button>
         <button disabled id="button_shuffle" value="shuffle">Shuffle</button>
         <div id="kofi"><a href='https://ko-fi.com/R6R6GVS9E' target='_blank'><img height='36'
